@@ -1,17 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getCurrentUser } from "@/lib/appwrite/api";
 import { IUser } from "@/types";
+import { INITIAL_USER } from "./initialState";
 
-export const INITIAL_USER = {
-  id: "",
-  name: "",
-  username: "",
-  email: "",
-  imageUrl: "",
-  bio: "",
-};
+
 
 const INITIAL_STATE = {
   user: INITIAL_USER,
@@ -31,7 +25,7 @@ type IContextType = {
   checkAuthUser: () => Promise<boolean>;
 };
 
-const AuthContext = createContext<IContextType>(INITIAL_STATE);
+export const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
 export default function AuthProvider({
   children,
@@ -95,4 +89,4 @@ export default function AuthProvider({
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export const useUserContext = () => useContext(AuthContext);
+
